@@ -1,11 +1,11 @@
-<template lang="html">
+<template>
   <div class="wrapper">
+    <userLogin></userLogin>
   </div>
 </template>
 
 <script>
-import mains from './components/mains';
-import menus from './components/menu';
+import users from './user/user.vue'
 
 export default {
   data: function(){
@@ -14,8 +14,7 @@ export default {
     }
   },
   components:{
-    mains: mains,
-    menus: menus
+    'userLogin': users
   }
 }
 </script>
@@ -41,7 +40,7 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 html,body,ul,li,ol,h1,h2,h3,p { margin: 0; padding: 0;}
-a { text-decoration: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;}
+a { text-decoration: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; color: #000;}
 ul,ol { list-style: none;}
 em,i { font-style: normal;}
 h1,h2,h3 { font-size: 100%; font-weight: normal;}
@@ -49,16 +48,10 @@ h1,h2,h3 { font-size: 100%; font-weight: normal;}
 /* common */
 .wrapper {
   width: 100%; height: 100%; overflow: hidden; margin: 0 auto;
-  background: #ddd;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
 
 .wrapper .cardBox {
-  flex-grow: 1;
-  padding: 20px;
+  margin: 100px auto;
 }
 
 </style>

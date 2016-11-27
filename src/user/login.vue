@@ -1,7 +1,8 @@
-<template lang="html">
-  <mt-field label="手机号" v-model="tel" placeholder="请输入手机号" type="tel"></mt-field>
-  <mt-field label="密码" v-model="password" placeholder="请输入密码" type="password"></mt-field>
-  <mt-button type="primary">登陆</mt-button>
+<template >
+  <div class="from-group">
+    <mt-field label="手机号" placeholder="请输入手机号" type="tel"></mt-field>
+    <mt-field label="密码" placeholder="请输入密码" type="password"></mt-field>
+  </div>
 </template>
 
 <script>

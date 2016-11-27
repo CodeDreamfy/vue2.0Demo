@@ -1,24 +1,33 @@
-<template lang="html">
+<template>
   <div class="cardBox">
-    <registered v-show="regflag"></registered>
+    <reg v-show="regflag"></reg>
     <login v-show="loginflag"></login>
   </div>
 </template>
 
+
 <script>
-import registered from 'registered'
-import login from 'login'
+import registered from '../user/registered.vue';
+import login from '../user/login.vue';
 
 export default {
   data () {
     return {
       regflag: true,
-      loginflag: ''
+      loginflag: false
     }
   },
   components: {
-    registered,
+    'reg': registered,
     login
+  },
+  methods: {
+    renderto (){
+      console.log("uuuuuu")
+    }
+  },
+  mounted: function(){
+    this.renderto()
   }
 }
 </script>
