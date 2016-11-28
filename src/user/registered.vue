@@ -6,11 +6,13 @@
         <label for="tel">手机号</label>
         <div class="right">
           <input type="number" placeholder="请输入手机号"/>
-          <a href="javascript:;" class="yzm-btn">获取验证码</a>
+          <a href="javascript:;" class="yzm-btn" :class="{yzmActive : isActive}" @click="yzm">{{tips}}</a>
         </div>
       </div>
     </div>
-    <mt-field label="验证码"></mt-field>
+    <mt-field label="验证码" placeholder="请输入验证码" type="number"></mt-field>
+    <mt-button size="large" type="primary" >注册</mt-button>
+    <a class="tips-for-login" @click="turnForLogin">已有账号？立即登陆</a>
   </div>
 </template>
 
@@ -18,29 +20,62 @@
 export default {
   data () {
     return {
-      regisiter: true
+      tips: '获取验证码',
+      isActive: true
+    }
+  },
+  methods: {
+    yzm () {
+      if(this.isActive){
+        this.isActive = false;
+        let i = 60;
+        let _this = this;
+        let m = setInterval(function(){
+          if(i>0){
+            _this.tips = '剩余'+ i +'s'
+          }else {
+            clearTimeout(m);
+            _this.tips = '获取验证码'
+            _this.isActive = true;
+          }
+          i--;
+        },1000);
+      }
+    },
+    turnForLogin () {
+      this.$emit('turn',{reg:false,login:true})
     }
   }
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
+.from-group { padding:  0 24px; }
 .form-item { width: 100%; padding: 0 10px;}
 .form-item .inner-wrap{
   width: 100%;
   min-height: 48px;
   border-top: 1px solid #d9d9d9;
 }
-.form-item label { float: left; width: 105px; min-height: 48px; line-height: 48px;}
-.form-item .right  { overflow: hidden;}
-.form-item .right input { width: 60%; border: none; outline: 0; font-size: 16px; vertical-align: middle; min-height: 48px;}
+.form-item label { float: left; width: 90px; min-height: 48px; line-height: 48px; font-size: 16px;}
+.form-item .right  { display: flex; align-items: center;}
+.form-item .right input { min-width: 100px; flex: 3; border: none; outline: 0; font-size: 16px; min-height: 48px;}
 .form-item .right .yzm-btn {
-  display: inline-block; padding: 0 10px;
+  flex: 2;
+  padding: 0 4px;
   height: 30px; line-height: 30px; border-radius: 8px;
-  background: #ddd; text-align: center; vertical-align: middle;
+  background: #ddd; text-align: center;
 }
-.form-item .right:after {
-  content:''; width: 1px; min-height: 48px; display: inline-block; vertical-align: middle; margin-right: -1px;
+.form-item .right .yzm-btn.yzmActive {
+  background: #26a2ff; color: #fff;
 }
 .form-item .right .yzm-btn:focus { outline: 0; }
+
+.from-group .mint-cell.mint-field .mint-cell-wrapper .mint-cell-title {
+  width: 90px;
+}
+.tips-for-login {
+  display: block; height: 40px; line-height: 40px;
+  text-align: right; text-decoration: underline;
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="cardBox">
-    <reg v-show="regflag"></reg>
-    <login v-show="loginflag"></login>
+    <reg v-show="regflag" @turn="turnTo"></reg>
+    <login v-show="loginflag" @turn="turnTo"></login>
   </div>
 </template>
 
@@ -24,6 +24,10 @@ export default {
   methods: {
     renderto (){
       console.log("uuuuuu")
+    },
+    turnTo (o) {
+      this.regflag = o.reg;
+      this.loginflag = o.login;
     }
   },
   mounted: function(){
