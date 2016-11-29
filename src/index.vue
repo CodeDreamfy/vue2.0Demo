@@ -15,6 +15,9 @@ export default {
   },
   components:{
     'userLogin': users
+  },
+  create(){
+    console.log('s')
   }
 }
 </script>

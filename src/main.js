@@ -1,20 +1,20 @@
-import Vue from 'vue'
-import MintUI from 'mint-ui'
-import 'mint-ui/lib/style.css'
-import index from './index'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Vuex from 'vuex';
+import MintUI from 'mint-ui';
+import 'mint-ui/lib/style.css';
+import index from './index';
+import routes from './router.js';
 
 /* eslint-disable no-new */
-Vue.use(MintUI)
-new Vue({
-  el: '#app',
-  template: '<index/>',
-  components: { index }
-})
+Vue.use(MintUI);
+Vue.use(VueRouter);
+Vue.use(Vuex);
 
-/*
 const router = new VueRouter({
-  routes: [
-    { path: '/user/:id', component: user}
-  ]
+  mode: 'history',
+  routes
 })
-*/
+const app = new Vue({
+  router
+}).$mount('#app')
