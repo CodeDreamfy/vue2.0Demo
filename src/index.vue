@@ -15,9 +15,6 @@ export default {
   },
   components:{
     'userLogin': users
-  },
-  create(){
-    console.log('s')
   }
 }
 </script>
@@ -50,7 +47,7 @@ h1,h2,h3 { font-size: 100%; font-weight: normal;}
 
 /* common */
 .wrapper {
-  width: 100%; height: 100%; overflow: hidden; margin: 0 auto;
+  width: 100%; height: 100%; overflow: hidden; margin: 0 auto; padding: 0 12px;
 }
 
 .wrapper .cardBox {
