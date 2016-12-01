@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="wrapper">
-
+    <h1>hehe{{$router.params}}</h1>
+    <router-view></router-view>
   </div>
 </template>
 
