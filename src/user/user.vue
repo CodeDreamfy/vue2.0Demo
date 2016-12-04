@@ -37,4 +37,7 @@ export default {
 </script>
 
 <style lang="css">
+.cardBox {
+  padding:  0 12px;
+}
 </style>

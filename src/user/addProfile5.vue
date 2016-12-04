@@ -1,0 +1,105 @@
+<template>
+  <div class="wrapper step5">
+    <h2 class="title">您的健康状况？</h2>
+    <div class="form-group">
+      <div class="form-item">
+        <div class="inputWrap">
+          <label for="type">糖尿病</label>
+          <a class="val" @click="showType" href="javascript:;">未填写</a>
+        </div>
+        <div class="outWrap" v-show="outTypeActive">
+          <template v-for="(typeval, index) in typeList" >
+            <input type="radio" :id="index" name="typeVal"  v-model="picked">
+            <label :for="index" @click="getTypeVal" class="labelCheck" :class="{active: IstypeActive}" >{{typeval}}</label>
+          </template>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</template>
+<script>
+  export default {
+    data () {
+      return {
+        outTypeActive: false,
+        IstypeActive: false,
+        index: '',
+        picked: '',
+        typeList: ['1型糖尿病', '2型糖尿病', '妊娠糖尿病', '特殊糖尿病', '糖尿病前期','糖尿病其他']
+      }
+    },
+    methods: {
+      getTypeVal () {
+        this.IstypeActive  ? this.IstypeActive = false : this.IstypeActive = true;
+      },
+      showType () {
+        this.outTypeActive ? this.outTypeActive = false : this.outTypeActive=  true;
+
+      }
+    },
+    computed: {
+      index () {
+        return 'typeval'+this.index
+      }
+    }
+  }
+</script>
+<style>
+  .step5 { }
+
+  .step5 .title {
+    color: #000;
+    font-size: 28px;
+    padding: 60px 12px 30px;
+    background: #e5e9ec;
+  }
+  .step5 .title:first-letter { font-size: 38px; }
+  .step5 .form-group {
+    width: 100%; background: #fff;
+    min-height: 100px;
+  }
+  .step5 .form-group .form-item {
+    color: #000;
+  }
+  .step5 .form-group .form-item .inputWrap {
+    height: 44px; padding: 0 26px; border-bottom: 1px solid #d1d1d3;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .step5 .form-group .form-item .inputWrap label {
+     flex: 1;
+  }
+  .step5 .form-group .form-item .inputWrap .val {
+    flex: 2; text-align: right; color: #458be0; font-size: 18px;
+    position: relative; padding-right: 30px;
+  }
+  .step5 .form-group .form-item .inputWrap .val:after {
+    content: '>'; right: 0;
+    font-size: 20px; color: #d1d1d3; position: absolute;
+    transition: all .8s;
+  }
+  .step5 .form-group .form-item .inputWrap .val.active:after {
+    transform: rotate(90deg);
+  }
+  .step5 .form-group .form-item .outWrap {
+    display: flex; justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+  .step5 .form-group .form-item .outWrap>input {
+    display: none;
+  }
+  .step5 .form-group .form-item .outWrap .labelCheck {
+    font-size: 16px; padding: 0 8px; margin-top: 8px;
+    height: 54px; line-height: 54px; width: 120px;
+    border: 1px solid #d1d1d3; border-radius: 10px;
+    text-align: center; transition: all 0.8s;
+  }
+  .step5 .form-group .form-item .outWrap .labelCheck:active {
+    box-shadow: inset 0 0 0 30px #d1d1d3;
+  }
+  .step5 .form-group .form-item .outWrap .labelCheck.active {
+    color: #fff; background: #458be0; border: none;
+    box-shadow: none;
+  }
+</style>

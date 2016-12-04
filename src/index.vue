@@ -47,11 +47,13 @@ h1,h2,h3 { font-size: 100%; font-weight: normal;}
 
 /* common */
 .wrapper {
-  width: 100%; height: 100%; overflow: hidden; margin: 0 auto; padding: 0 12px;
+  width: 100%; height: 100%; overflow: hidden; margin: 0 auto;
 }
 
 .wrapper .cardBox {
   margin: 100px auto;
+  height: 100%; position: relative;
+  width: 100%;
 }
 
 </style>
