@@ -14,8 +14,33 @@
           </template>
         </div>
       </div>
+      <div class="form-item">
+        <div class="inputWrap">
+          <label for="type">确诊时间(病史)</label>
+          <a class="val" @click="showType" href="javascript:;">未填写</a>
+        </div>
+        <div class="outWrap" v-show="outyearActive">
+          <template v-for="(yearval, index) in yearList" >
+            <input type="radio" :id="index" name="yearval"  v-model="picked">
+            <label :for="index" @click="getTypeVal" class="labelCheck" :class="{active: IstypeActive}" >{{yearval}}</label>
+          </template>
+        </div>
+      </div>
+      <div class="form-item">
+        <div class="inputWrap">
+          <label for="type">治疗方式(可多选)</label>
+          <a class="val" @click="showType" href="javascript:;">未填写</a>
+        </div>
+        <div class="outWrap" v-show="outTreatmentActive">
+          <template v-for="(treatment, index) in treatmentList" >
+            <input type="radio" :id="index" name="typeVal"  v-model="picked">
+            <label :for="index" @click="getTypeVal" class="labelCheck" :class="{active: IstypeActive}" >{{treatment}}</label>
+          </template>
+        </div>
+      </div>
 
     </div>
+    <router-link to="/profile/step5" class="actionToNext" >下一步</router-link>
   </div>
 </template>
 <script>
@@ -23,10 +48,14 @@
     data () {
       return {
         outTypeActive: false,
+        outyearActive: false,
+        outTreatmentActive: false,
         IstypeActive: false,
         index: '',
         picked: '',
-        typeList: ['1型糖尿病', '2型糖尿病', '妊娠糖尿病', '特殊糖尿病', '糖尿病前期','糖尿病其他']
+        typeList: ['1型糖尿病', '2型糖尿病', '妊娠糖尿病', '特殊糖尿病', '糖尿病前期','糖尿病其他'],
+        yearList: ['1年', '2年', '3年', '5年以上', '8年以上','其他'],
+        treatmentList: ['饮食控制', '运动控制', '口服药', '胰岛素', '暂无']
       }
     },
     methods: {
@@ -46,8 +75,10 @@
   }
 </script>
 <style>
-  .step5 { }
-
+  #app, .wrapper.step5 {
+    overflow-y:auto;
+    height: auto;
+  }
   .step5 .title {
     color: #000;
     font-size: 28px;
@@ -70,7 +101,7 @@
      flex: 1;
   }
   .step5 .form-group .form-item .inputWrap .val {
-    flex: 2; text-align: right; color: #458be0; font-size: 18px;
+    flex: 1; text-align: right; color: #458be0; font-size: 18px;
     position: relative; padding-right: 30px;
   }
   .step5 .form-group .form-item .inputWrap .val:after {
