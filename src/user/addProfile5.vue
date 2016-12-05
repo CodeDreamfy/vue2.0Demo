@@ -5,7 +5,7 @@
       <div class="form-item">
         <div class="inputWrap">
           <label for="type">糖尿病</label>
-          <a class="val" @click="showType" href="javascript:;">未填写</a>
+          <a class="val" @click="showType(1)" href="javascript:;">未填写</a>
         </div>
         <div class="outWrap" v-show="outTypeActive">
           <template v-for="(typeval, index) in typeList" >
@@ -17,24 +17,24 @@
       <div class="form-item">
         <div class="inputWrap">
           <label for="type">确诊时间（病史）</label>
-          <a class="val" @click="showType" href="javascript:;">未填写</a>
+          <a class="val" @click="showType(2)" href="javascript:;">未填写</a>
         </div>
-        <div class="outWrap" v-show="outTypeActive">
+        <div class="outWrap" v-show="outTimesActive">
           <template v-for="(typeval, index) in yearList" >
-            <input type="radio" :id="'typeval' + index" name="typeVal"  v-model="times">
-            <label :for="'typeval' + index" @click="getTypeVal(index)" :class="{labelCheck: true, active: itemTitle == index}" >{{typeval.val}}</label>
+            <input type="radio" :id="'yearval' + index" name="typeVal"  v-model="times">
+            <label :for="'yearval' + index" @click="getTimesVal(index)" :class="{labelCheck: true, active: yearTitle == index}" >{{typeval.val}}</label>
           </template>
         </div>
       </div>
       <div class="form-item">
         <div class="inputWrap">
           <label for="type">治疗方式（可多选）</label>
-          <a class="val" @click="showType" href="javascript:;">未填写</a>
+          <a class="val" @click="showType(3)" href="javascript:;">未填写</a>
         </div>
-        <div class="outWrap" v-show="outTypeActive">
+        <div class="outWrap" v-show="outTreatActive">
           <template v-for="(typeval, index) in treatmentList" >
-            <input type="radio" :id="'typeval' + index" name="typeVal"  v-model="picked">
-            <label :for="'typeval' + index" @click="getTypeVal(index)" :class="{labelCheck: true, active: itemTitle == index}" >{{typeval.val}}</label>
+            <input type="radio" :id="'Treatval' + index" name="typeVal"  v-model="picked">
+            <label :for="'Treatval' + index" @click="getTreatVal(index)" :class="{labelCheck: true, active: treatTitle == index}" >{{typeval.val}}</label>
           </template>
         </div>
       </div>
@@ -48,8 +48,11 @@
     data () {
       return {
         outTypeActive: false,
-        IstypeActive: false,
+        outTimesActive: false,
+        outTreatActive: false,
         itemTitle: '',
+        yearTitle: '',
+        treatTitle: '',
         typeed: '',
         times: '',
         picked: '',
@@ -61,14 +64,14 @@
           {id:4, val:'糖尿病前期', show: false},
           {id:5, val:'糖尿病其他', show: false}
          ],
-         treatmentList: [
+        treatmentList: [
           {id:0, val:'饮食控制', show: false},
           {id:1, val:'运动控制', show: false},
           {id:2, val:'口服药', show: false},
           {id:3, val:'胰岛素', show: false},
           {id:4, val:'暂无', show: false}
          ],
-         yearList: [
+        yearList: [
           {id:0, val:'1年', show: false},
           {id:1, val:'2年', show: false},
           {id:2, val:'3年', show: false},
@@ -80,17 +83,20 @@
     },
     methods: {
       getTypeVal (index) {
-        /*for(let i=0; i<this.typeList.length; i++){
-          if(i == index){
-            this.typeList[index].show ? this.typeList[index].show = false : this.typeList[index].show =  true;
-          }else {
-            this.typeList[i].show = false;
-          }
-        }*/
         this.itemTitle = index;
       },
-      showType () {
-        this.outTypeActive  ? this.outTypeActive = false : this.outTypeActive = true;
+      getTimesVal (index) {
+        this.yearTitle = index;
+      },
+      getTreatVal (index) {
+        this.treatTitle = index;
+      },
+      showType (index) {
+        switch(index){
+          case 1: this.outTypeActive  ? this.outTypeActive = false : this.outTypeActive = true; break;
+          case 2: this.outTimesActive  ? this.outTimesActive = false : this.outTimesActive = true; break;
+          case 3: this.outTreatActive  ? this.outTreatActive = false : this.outTreatActive = true; break;
+        }
       }
     },
     computed: {
@@ -99,10 +105,11 @@
   }
 </script>
 <style>
-  #app, .wrapper.step5 {
+  #app {
     overflow-y:auto;
-    height: auto;
+    height: 100%;
   }
+  .step5 { height: auto; }
   .step5 .title {
     color: #000;
     font-size: 28px;
@@ -118,11 +125,11 @@
     color: #000;
   }
   .step5 .form-group .form-item .inputWrap {
-    height: 44px; padding: 0 26px; border-bottom: 1px solid #d1d1d3;
-    display: flex; justify-content: center; align-items: center;
+    height: 44px; border-bottom: 1px solid #d1d1d3;
+    display: flex; justify-content: space-around; align-items: center;
   }
   .step5 .form-group .form-item .inputWrap label {
-     flex: 1;
+     flex: 1; padding-left: 8px;
   }
   .step5 .form-group .form-item .inputWrap .val {
     flex: 1; text-align: right; color: #458be0; font-size: 18px;
