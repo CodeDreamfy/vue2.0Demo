@@ -9,32 +9,32 @@
         </div>
         <div class="outWrap" v-show="outTypeActive">
           <template v-for="(typeval, index) in typeList" >
-            <input type="radio" :id="index" name="typeVal"  v-model="picked">
-            <label :for="index" @click="getTypeVal" class="labelCheck" :class="{active: IstypeActive}" >{{typeval}}</label>
+            <input type="radio" :id="'typeval' + index" name="typeVal"  v-model="typeed">
+            <label :for="'typeval' + index" @click="getTypeVal(index)" :class="{labelCheck: true, active: itemTitle == index}" >{{typeval.val}}</label>
           </template>
         </div>
       </div>
       <div class="form-item">
         <div class="inputWrap">
-          <label for="type">确诊时间(病史)</label>
+          <label for="type">确诊时间（病史）</label>
           <a class="val" @click="showType" href="javascript:;">未填写</a>
         </div>
-        <div class="outWrap" v-show="outyearActive">
-          <template v-for="(yearval, index) in yearList" >
-            <input type="radio" :id="index" name="yearval"  v-model="picked">
-            <label :for="index" @click="getTypeVal" class="labelCheck" :class="{active: IstypeActive}" >{{yearval}}</label>
+        <div class="outWrap" v-show="outTypeActive">
+          <template v-for="(typeval, index) in yearList" >
+            <input type="radio" :id="'typeval' + index" name="typeVal"  v-model="times">
+            <label :for="'typeval' + index" @click="getTypeVal(index)" :class="{labelCheck: true, active: itemTitle == index}" >{{typeval.val}}</label>
           </template>
         </div>
       </div>
       <div class="form-item">
         <div class="inputWrap">
-          <label for="type">治疗方式(可多选)</label>
+          <label for="type">治疗方式（可多选）</label>
           <a class="val" @click="showType" href="javascript:;">未填写</a>
         </div>
-        <div class="outWrap" v-show="outTreatmentActive">
-          <template v-for="(treatment, index) in treatmentList" >
-            <input type="radio" :id="index" name="typeVal"  v-model="picked">
-            <label :for="index" @click="getTypeVal" class="labelCheck" :class="{active: IstypeActive}" >{{treatment}}</label>
+        <div class="outWrap" v-show="outTypeActive">
+          <template v-for="(typeval, index) in treatmentList" >
+            <input type="radio" :id="'typeval' + index" name="typeVal"  v-model="picked">
+            <label :for="'typeval' + index" @click="getTypeVal(index)" :class="{labelCheck: true, active: itemTitle == index}" >{{typeval.val}}</label>
           </template>
         </div>
       </div>
@@ -48,29 +48,53 @@
     data () {
       return {
         outTypeActive: false,
-        outyearActive: false,
-        outTreatmentActive: false,
         IstypeActive: false,
-        index: '',
+        itemTitle: '',
+        typeed: '',
+        times: '',
         picked: '',
-        typeList: ['1型糖尿病', '2型糖尿病', '妊娠糖尿病', '特殊糖尿病', '糖尿病前期','糖尿病其他'],
-        yearList: ['1年', '2年', '3年', '5年以上', '8年以上','其他'],
-        treatmentList: ['饮食控制', '运动控制', '口服药', '胰岛素', '暂无']
+        typeList: [
+          {id:0, val:'1型糖尿病', show: false},
+          {id:1, val:'2型糖尿病', show: false},
+          {id:2, val:'妊娠糖尿病', show: false},
+          {id:3, val:'特殊糖尿病', show: false},
+          {id:4, val:'糖尿病前期', show: false},
+          {id:5, val:'糖尿病其他', show: false}
+         ],
+         treatmentList: [
+          {id:0, val:'饮食控制', show: false},
+          {id:1, val:'运动控制', show: false},
+          {id:2, val:'口服药', show: false},
+          {id:3, val:'胰岛素', show: false},
+          {id:4, val:'暂无', show: false}
+         ],
+         yearList: [
+          {id:0, val:'1年', show: false},
+          {id:1, val:'2年', show: false},
+          {id:2, val:'3年', show: false},
+          {id:3, val:'5年以上', show: false},
+          {id:4, val:'8年以上', show: false},
+          {id:5, val:'其他', show: false}
+         ],
       }
     },
     methods: {
-      getTypeVal () {
-        this.IstypeActive  ? this.IstypeActive = false : this.IstypeActive = true;
+      getTypeVal (index) {
+        /*for(let i=0; i<this.typeList.length; i++){
+          if(i == index){
+            this.typeList[index].show ? this.typeList[index].show = false : this.typeList[index].show =  true;
+          }else {
+            this.typeList[i].show = false;
+          }
+        }*/
+        this.itemTitle = index;
       },
       showType () {
-        this.outTypeActive ? this.outTypeActive = false : this.outTypeActive=  true;
-
+        this.outTypeActive  ? this.outTypeActive = false : this.outTypeActive = true;
       }
     },
     computed: {
-      index () {
-        return 'typeval'+this.index
-      }
+
     }
   }
 </script>
