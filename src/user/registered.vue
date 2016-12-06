@@ -11,7 +11,7 @@
       </div>
     </div>
     <mt-field label="验证码" placeholder="请输入验证码" type="number"></mt-field>
-    <mt-button size="large" type="primary" >注册</mt-button>
+    <mt-button size="large" type="primary" @click="toProfile">注册</mt-button>
     <a class="tips-for-login" @click="turnForLogin">已有账号？立即登陆</a>
   </div>
 </template>
@@ -44,6 +44,9 @@ export default {
     },
     turnForLogin () {
       this.$emit('turn',{reg:false,login:true})
+    },
+    toProfile () {
+      this.$router.push({path: '/profile/step1'})
     }
   }
 }
